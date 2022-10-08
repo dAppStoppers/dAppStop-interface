@@ -29,7 +29,7 @@ core -> (lib | components) -> pages
 ## Tech
 
 - NextJS
-- TailwindCSS + headlessUI
+- TailwindCSS + daisyUI
 - Fleek (for deploy)
 - web3auth
 - wagmi
