@@ -1,24 +1,28 @@
 import { UserIcon, HomeIcon, BellIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export const BottomNavbar = () => {
+  const router = useRouter();
   return (
     <div className="btm-nav">
-      <button>
-        <Link href="alerts/">
+      <Link href="alerts/">
+        <button className={router.pathname == "/alerts" ? "active" : ""}>
           <BellIcon className="h-5 w-5" />
-        </Link>
-      </button>
-      <button className="active">
-        <Link href="/">
+        </button>
+      </Link>
+
+      <Link href="/">
+        <button className={router.pathname == "/" ? "active" : ""}>
           <HomeIcon className="h-5 w-5" />
-        </Link>
-      </button>
-      <button>
-        <Link href="profile/">
+        </button>
+      </Link>
+
+      <Link href="profile/">
+        <button className={router.pathname == "/profile" ? "active" : ""}>
           <UserIcon className="h-5 w-5" />
-        </Link>
-      </button>
+        </button>
+      </Link>
     </div>
   );
 };
