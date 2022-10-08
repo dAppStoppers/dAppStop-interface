@@ -1,6 +1,8 @@
 import Head from "next/head";
 import "../styles/globals.css";
 import { AppProps } from "next/app";
+import { Navbar } from "../components/layout/Navbar";
+import { Footer } from "../components/layout/Footer";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -32,7 +34,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <Component {...pageProps} />
+      <Navbar />
+      <div className="container mx-auto px-4">
+        <Component {...pageProps} />
+      </div>
+      <Footer />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-interface HeaderProps {
+export interface HeaderProps {
   title: string;
 }
 
