@@ -1,8 +1,51 @@
 import Head from "next/head";
 import "../styles/globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
 import { AppProps } from "next/app";
 import { Navbar } from "../components/layout/Navbar";
-import { Footer } from "../components/layout/Footer";
+import { BottomNavbar } from "../components/layout/BottomNavbar";
+import {
+  connectorsForWallets,
+  RainbowKitProvider,
+  darkTheme,
+} from "@rainbow-me/rainbowkit";
+import {
+  injectedWallet,
+  rainbowWallet,
+  metaMaskWallet,
+  coinbaseWallet,
+  walletConnectWallet,
+} from "@rainbow-me/rainbowkit/wallets";
+import { chain, createClient, WagmiConfig, configureChains } from "wagmi";
+import { rainbowWeb3AuthConnector } from "../core/auth/rainbowWeb3AuthConnector";
+
+import { publicProvider } from "wagmi/providers/public";
+
+const { chains, provider } = configureChains(
+  [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
+  [
+    // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
+    publicProvider(),
+  ]
+);
+const connectors = connectorsForWallets([
+  {
+    groupName: "Recommended",
+    wallets: [
+      injectedWallet({ chains }),
+      rainbowWallet({ chains }),
+      metaMaskWallet({ chains }),
+      coinbaseWallet({ chains, appName: "DappStop" }),
+      walletConnectWallet({ chains }),
+      // add web3auth wallet connector here
+      rainbowWeb3AuthConnector({ chains }),
+    ],
+  },
+]);
+const wagmiClient = createClient({
+  connectors,
+  provider,
+});
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -34,11 +77,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#317EFB" />
       </Head>
-      <Navbar />
-      <div className="container mx-auto px-4">
-        <Component {...pageProps} />
-      </div>
-      <Footer />
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider theme={darkTheme()} chains={chains}>
+          <Navbar />
+          <div className="container mx-auto px-4">
+            <Component {...pageProps} />
+          </div>
+          <BottomNavbar />
+        </RainbowKitProvider>
+      </WagmiConfig>
     </>
   );
 }
