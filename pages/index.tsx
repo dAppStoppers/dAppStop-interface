@@ -1,13 +1,15 @@
-import { DappList } from "../components/dappList";
-import { NavigationBar } from "../components/navigationBar";
+import { DappList } from "../components/explore/DappList";
+import { Navbar } from "../components/layout/Navbar";
+import { Footer } from "../components/layout/Footer";
 
 export default function Home() {
   return (
     <>
-      <NavigationBar />
+      <Navbar />
       <div className="container mx-auto px-4">
         <DappList />
       </div>
+      <Footer />
     </>
   );
 }

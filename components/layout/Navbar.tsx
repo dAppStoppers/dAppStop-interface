@@ -1,8 +1,8 @@
-export const NavigationBar = () => {
+export const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <img src="/icons/dappstopLogo.svg" className="h-8" />
+        <img src="/icons/dappstopLogo.svg" className="h-5" />
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
