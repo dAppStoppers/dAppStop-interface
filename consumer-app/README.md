@@ -21,3 +21,17 @@ pnpm create next-app --example progressive-web-app progressive-web-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Folder Structure
+
+core -> (lib | components) -> pages
+
+## Tech
+
+- NextJS
+- TailwindCSS + headlessUI
+- Fleek (for deploy)
+- web3auth
+- wagmi
+- zustand <- redux replacement
+- interface > type
