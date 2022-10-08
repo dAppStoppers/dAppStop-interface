@@ -1,6 +1,6 @@
 export default function Profile() {
   return (
-    <div className="pb-10 md:pb-24">
+    <div className="pb-24 md:pb-24">
       <img
         src="/icons/cover-image.png"
         className="object-cover w-full pl-0 pr-0"
@@ -22,8 +22,11 @@ export default function Profile() {
           @gamestudio.eth
         </p>
       </div>
-      <div className="flex justify-between pt-10 pb-5 mx-5">
-        <p style={{ fontSize: "1.5rem" }}>Published App</p>
+      <div className="flex justify-between align-middle pt-10 pb-5 mx-5">
+        <div>
+          <p style={{ fontSize: "1.1rem" }}>Published</p>
+          <p style={{ fontSize: "1.1rem" }}>Apps</p>
+        </div>
         <button className="btn btn-primary">Publish New App</button>
       </div>
       <div

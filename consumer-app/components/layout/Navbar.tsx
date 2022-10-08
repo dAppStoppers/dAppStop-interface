@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 ">
+    <div className="navbar bg-base-100" style={{ backgroundColor: "black" }}>
       <div className="flex-1">
         <Link href="/">
           <img src="/icons/dappstopLogo.svg" className="h-5 pl-3" />
