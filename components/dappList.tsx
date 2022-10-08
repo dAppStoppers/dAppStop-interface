@@ -1,4 +1,4 @@
-function DappList() {
+export const DappList = () => {
   return (
     <>
       <ul>
@@ -8,6 +8,4 @@ function DappList() {
       </ul>
     </>
   );
-}
-
-export { DappList };
+};

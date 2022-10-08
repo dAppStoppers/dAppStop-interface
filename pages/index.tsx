@@ -5,7 +5,7 @@ export default function Home() {
     <>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <img src="/dappstopLogo.svg" className="h-8" />
+          <img src="/icons/dappstopLogo.svg" className="h-8" />
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
