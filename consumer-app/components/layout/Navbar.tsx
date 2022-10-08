@@ -31,9 +31,11 @@ export const Navbar = () => {
         </label>
         {/* User avatar */}
         <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <UserCircleIcon className="h-5 w-5 cursor-pointer" />
-          </label>
+          <Link href="profile/">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <UserCircleIcon className="h-5 w-5 cursor-pointer" />
+            </label>
+          </Link>
           <ul
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
