@@ -7,14 +7,14 @@ import { BottomNavbar } from "../components/layout/BottomNavbar";
 import {
   connectorsForWallets,
   RainbowKitProvider,
-  darkTheme,
+  darkTheme
 } from "@rainbow-me/rainbowkit";
 import {
   injectedWallet,
   rainbowWallet,
   metaMaskWallet,
   coinbaseWallet,
-  walletConnectWallet,
+  walletConnectWallet
 } from "@rainbow-me/rainbowkit/wallets";
 import { chain, createClient, WagmiConfig, configureChains } from "wagmi";
 import { rainbowWeb3AuthConnector } from "../core/auth/rainbowWeb3AuthConnector";
@@ -25,7 +25,7 @@ const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
   [
     // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
-    publicProvider(),
+    publicProvider()
   ]
 );
 const connectors = connectorsForWallets([
@@ -38,13 +38,13 @@ const connectors = connectorsForWallets([
       coinbaseWallet({ chains, appName: "DappStop" }),
       walletConnectWallet({ chains }),
       // add web3auth wallet connector here
-      rainbowWeb3AuthConnector({ chains }),
-    ],
-  },
+      rainbowWeb3AuthConnector({ chains })
+    ]
+  }
 ]);
 const wagmiClient = createClient({
   connectors,
-  provider,
+  provider
 });
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -80,7 +80,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider theme={darkTheme()} chains={chains}>
           <Navbar />
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto">
             <Component {...pageProps} />
           </div>
           <BottomNavbar />

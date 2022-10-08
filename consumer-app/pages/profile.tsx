@@ -1,12 +1,12 @@
 export default function Profile() {
   return (
-    <div className="pb-10">
+    <div className="pb-10 md:pb-24">
       <img
         src="/icons/cover-image.png"
-        className="object-cover w-full"
+        className="object-cover w-full pl-0 pr-0"
         alt="Avatar Tailwind CSS Component"
       />
-      <div className="md:ml-20 ">
+      <div className="md:ml-20 px-5 ">
         <img
           src="/icons/game-studio.png"
           alt="Avatar Tailwind CSS Component"
@@ -14,7 +14,7 @@ export default function Profile() {
             height: "150px",
             width: "150px",
             position: "sticky",
-            marginTop: "-5rem",
+            marginTop: "-5rem"
           }}
         />
         <p className="pt-2">Game studio name</p>
@@ -22,18 +22,18 @@ export default function Profile() {
           @gamestudio.eth
         </p>
       </div>
-      <div className="flex justify-between pt-14 pb-5">
+      <div className="flex justify-between pt-10 pb-5 mx-5">
         <p style={{ fontSize: "1.5rem" }}>Published App</p>
         <button className="btn btn-primary">Publish New App</button>
       </div>
       <div
-        className="overflow-x-auto"
+        className="overflow-x-auto mx-5"
         style={{
           borderRadius: ".5rem",
-          border: "1px solid rgba(255, 255, 255, 0.15)",
+          border: "1px solid rgba(255, 255, 255, 0.15)"
         }}
       >
-        <table className="table w-full ">
+        <table className="table w-full">
           <thead>
             <tr>
               <th></th>
@@ -50,7 +50,7 @@ export default function Profile() {
             <tr
               style={{
                 borderTop: "1px solid rgba(255, 255, 255, 0.15)",
-                width: "100%",
+                width: "100%"
               }}
             >
               <td>
