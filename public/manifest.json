@@ -1,6 +1,6 @@
 {
-  "name": "Next.JS Progressive Web App",
-  "short_name": "Next PWA",
+  "name": "DappStop",
+  "short_name": "DappStop",
   "theme_color": "#ffffff",
   "background_color": "#004740",
   "display": "fullscreen",
