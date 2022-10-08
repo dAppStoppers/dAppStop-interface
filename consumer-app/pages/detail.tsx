@@ -1,5 +1,9 @@
 import { ChangeLog, ChangeLogProps } from "../components/detail/ChangeLog";
-import { Header, HeaderProps } from "../components/detail/Header";
+import { DappInfo, DappInfoProps } from "../components/detail/DappInfo";
+import {
+  DetailHeader,
+  DetailHeaderProps,
+} from "../components/detail/DetailHeader";
 import {
   ImageCarousel,
   ImageCarouselProps,
@@ -7,10 +11,10 @@ import {
 import {
   InstallButton,
   InstallButtonProps,
-} from "../components/detail/InstallButton";
+} from "../components/install/InstallButton";
 
 export default function Detail() {
-  const headerProps: HeaderProps = { title: "Dummy Title" };
+  const detailHeaderProps: DetailHeaderProps = { title: "Dummy Title" };
   const installButtonProps: InstallButtonProps = { priceInEth: 0.1 };
   const changeLogProps: ChangeLogProps = {
     changeLogItems: [
@@ -33,10 +37,20 @@ export default function Detail() {
       "https://placeimg.com/250/180/arch",
     ],
   };
+  const dappInfoProps: DappInfoProps = {
+    category: "Gaming",
+    chains: ["Polygon", "Boba"],
+    description: "Here is a description of the dapp.",
+    downloads: 42069,
+    publisher: "publisher.eth",
+    publisherIconUrl: "https://placeimg.com/250/180/arch",
+    title: "My Cool Game",
+  };
 
   return (
     <>
-      <Header {...headerProps} />
+      <DetailHeader {...detailHeaderProps} />
+      <DappInfo {...dappInfoProps} />
       <InstallButton {...installButtonProps} />
       <ImageCarousel {...imageCarouselProps} />
       <ChangeLog {...changeLogProps} />

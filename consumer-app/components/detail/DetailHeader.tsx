@@ -1,11 +1,11 @@
 import { ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-export interface HeaderProps {
+export interface DetailHeaderProps {
   title: string;
 }
 
-export const Header = ({ title }: HeaderProps) => {
+export const DetailHeader = ({ title }: DetailHeaderProps) => {
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
