@@ -28,7 +28,11 @@ specifiers:
   postcss: ^8.4.17
   react: ^17.0.2
   react-dom: ^17.0.2
+<<<<<<< HEAD
   react-hook-form: ^7.37.0
+=======
+  react-responsive-carousel: ^3.2.23
+>>>>>>> 60799b2 (styles fixed)
   tailwindcss: ^3.1.8
   typescript: 4.5.4
   wagmi: ^0.6.8
@@ -44,7 +48,11 @@ dependencies:
   next-pwa: 5.5.4_r4fnhujxxwelquxkfzi3g5np24
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
+<<<<<<< HEAD
   react-hook-form: 7.37.0_react@17.0.2
+=======
+  react-responsive-carousel: 3.2.23
+>>>>>>> 60799b2 (styles fixed)
   wagmi: 0.6.8_4o4f3aczb65nl5npnb3ryzuosi
   web3.storage: 4.4.0_dr4tyf4xy67re4xs7xbteim6xe
 
@@ -10232,6 +10240,7 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+<<<<<<< HEAD
   /react-hook-form/7.37.0_react@17.0.2:
     resolution: {integrity: sha512-6NFTxsnw+EXSpNNvLr5nFMjPdYKRryQcelTHg7zwBB6vAzfPIcZq4AExP4heVlwdzntepQgwiOQW4z7Mr99Lsg==}
     engines: {node: '>=12.22.0'}
@@ -10239,6 +10248,13 @@ packages:
       react: ^16.8.0 || ^17 || ^18
     dependencies:
       react: 17.0.2
+=======
+  /react-easy-swipe/0.0.21:
+    resolution: {integrity: sha512-OeR2jAxdoqUMHIn/nS9fgreI5hSpgGoL5ezdal4+oO7YSSgJR8ga+PkYGJrSrJ9MKlPcQjMQXnketrD7WNmNsg==}
+    engines: {node: '>= 6'}
+    dependencies:
+      prop-types: 15.8.1
+>>>>>>> 60799b2 (styles fixed)
     dev: false
 
   /react-is/16.13.1:
@@ -10380,6 +10396,14 @@ packages:
       tslib: 2.4.0
       use-callback-ref: 1.3.0_wchdyfjsjs7jbjx7r7guc3etfq
       use-sidecar: 1.1.2_wchdyfjsjs7jbjx7r7guc3etfq
+    dev: false
+
+  /react-responsive-carousel/3.2.23:
+    resolution: {integrity: sha512-pqJLsBaKHWJhw/ItODgbVoziR2z4lpcJg+YwmRlSk4rKH32VE633mAtZZ9kDXjy4wFO+pgUZmDKPsPe1fPmHCg==}
+    dependencies:
+      classnames: 2.3.2
+      prop-types: 15.8.1
+      react-easy-swipe: 0.0.21
     dev: false
 
   /react-shallow-renderer/16.15.0_react@17.0.2:

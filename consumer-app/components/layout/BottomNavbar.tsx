@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export const BottomNavbar = () => {
   const router = useRouter();
   return (
-    <div className="btm-nav">
+    <div className="btm-nav" style={{ zIndex: "100000" }}>
       <Link href="alerts/">
         <button className={router.pathname == "/alerts" ? "active" : ""}>
           <BellIcon

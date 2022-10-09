@@ -1,7 +1,10 @@
 export default function Upload() {
   return (
     <div className="container flex justify-center pt-8 pb-20">
-      <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+      <div
+        className="p-6 max-w-sm bg-white rounded-lg  shadow-md dark:bg-gray-800 dark:border-gray-700 mx-5"
+        style={{ background: "rgba(255, 255, 255, 0.15)" }}
+      >
         <h1 className="text-4xl">Publish your app</h1>
 
         <div className="form-control mb-5">
