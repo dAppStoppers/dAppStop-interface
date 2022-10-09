@@ -8,6 +8,7 @@ import {
   connectorsForWallets,
   RainbowKitProvider,
   darkTheme,
+  Chain,
 } from "@rainbow-me/rainbowkit";
 import {
   injectedWallet,
@@ -21,14 +22,37 @@ import { rainbowWeb3AuthConnector } from "../core/auth/rainbowWeb3AuthConnector"
 
 import { publicProvider } from "wagmi/providers/public";
 
+// Init Klaytn Chain
+const klaytn: Chain = {
+  id: 8217,
+  name: "Klaytn",
+  network: "klaytn",
+  iconUrl:
+    "https://bafybeic5fcz5bwv6la7tcocgv5mswkv4eq7nfyvvd6o3cfhhqcv4rkm24e.ipfs.w3s.link/Klaytn.png",
+  iconBackground: "#fff",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Klaytn",
+    symbol: "KLAY",
+  },
+  rpcUrls: {
+    default: "https://public-node-api.klaytnapi.com/v1/cypress",
+  },
+  blockExplorers: {
+    default: { name: "SnowTrace", url: "https://scope.klaytn.com" },
+  },
+  testnet: false,
+};
+
 const { chains, provider } = configureChains(
   [
     chain.mainnet,
+    klaytn,
     chain.polygon,
     chain.polygonMumbai,
     chain.optimism,
     chain.arbitrum,
-    chain.goerli
+    chain.goerli,
   ],
   [
     // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
