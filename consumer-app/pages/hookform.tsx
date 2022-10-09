@@ -1,6 +1,11 @@
 import { useForm } from "react-hook-form";
 import { makeStorageClient } from "../lib/makeStorageClient";
 import { ComposeConnector } from "../services/ComposeConnector.service";
+import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
+import { dappStopRegistry } from "../lib/dappStopRegistry";
+import { useEffect, useState } from "react";
+import { useDebounce } from "../core/useDebounce";
+
 interface FormData {
   title: string;
   description: string;
@@ -28,6 +33,20 @@ interface ComposePayload {
   appVersion: string;
 }
 
+interface TokenMetadataPayload {
+  name: string;
+  description: string;
+  image: string;
+  ceramicURI: string;
+}
+
+interface SmartContractPayload {
+  creator: string;
+  popURI: string;
+  ceramicURI: string;
+  price: string;
+}
+
 const storageClient = makeStorageClient();
 const composeConnector = new ComposeConnector();
 
@@ -37,7 +56,32 @@ function makeIpfsUri(cid: string) {
 
 export default function HookForm() {
   const { register, handleSubmit } = useForm<FormData>();
+  const { address, isConnected } = useAccount();
+  const [contractPayload, setContractPayload] =
+    useState<SmartContractPayload | null>(null);
+  const debouncedContractPayload = useDebounce(contractPayload, 500);
+  // write to smart contract
+  const { config } = usePrepareContractWrite({
+    addressOrName: "0x7e912cbcEe54Bf7A70fA97B338Ebc79276AE3bc7",
+    contractInterface: dappStopRegistry.abi,
+    functionName: "register",
+    args: [debouncedContractPayload],
+    enabled: debouncedContractPayload !== null,
+  });
 
+  const { write } = useContractWrite(config);
+
+  function writeIt() {
+    write?.();
+  }
+
+  useEffect(() => {
+    if (contractPayload) {
+      console.log("hi");
+    }
+  }, [contractPayload]);
+
+  // submit functionas
   const onSubmit = async (data: FormData) => {
     // upload each to ipfs
     const uploadPromises = [
@@ -70,10 +114,33 @@ export default function HookForm() {
 
     const composeCreateResp = await composeConnector.create(composePayload);
     console.log("composeCreateResp:", composeCreateResp);
+
+    // upload nft metadata to web3 storage
+    const tokenMetadataPayload: TokenMetadataPayload = {
+      name: data.title,
+      description: data.description,
+      image: makeIpfsUri(appIconCid),
+      ceramicURI: `ceramic://${composeCreateResp}`,
+    };
+    const blob = new Blob([JSON.stringify(tokenMetadataPayload)], {
+      type: "application/json",
+    });
+    const files = [new File([blob], "tokenMetadata.json")];
+    const popURI = await storageClient.put(files);
+    const ipfsPopUri = makeIpfsUri(`${popURI}/tokenMetadata.json`);
+
+    // create smart contract payload
+    const smartContractPayload: SmartContractPayload = {
+      creator: address ?? "0x0000",
+      popURI: ipfsPopUri,
+      ceramicURI: `ceramic://${composeCreateResp}`,
+      price: data.price,
+    };
+    console.log("smartContractPayload:", smartContractPayload);
+    setContractPayload(smartContractPayload);
   };
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form onSubmit={handleSubmit(onSubmit)}>
       <p>Title:</p>
       <input
@@ -139,7 +206,14 @@ export default function HookForm() {
       />
       <br />
 
-      <input className="btn btn-primary" type="submit" />
+      <input
+        className="btn btn-primary"
+        type="submit"
+        disabled={!isConnected}
+      />
+      <button className="btn btn-primary" disabled={!write} onClick={writeIt}>
+        Mint
+      </button>
     </form>
   );
 }
