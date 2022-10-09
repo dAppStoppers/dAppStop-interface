@@ -1,3 +1,6 @@
 export function transformIpfsLinkToGateway(ipfsUri: string) {
-  return ipfsUri.replace("ipfs://", "https://ipfs.io/ipfs/");
+  return ipfsUri.replace(
+    "ipfs://",
+    "https://propertys-nft.mypinata.cloud/ipfs/"
+  );
 }

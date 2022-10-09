@@ -9,7 +9,7 @@ export interface InstallButtonProps {
 }
 
 function installApk(ipfsUri: string) {
-  const apkUri = `${transformIpfsLinkToGateway(ipfsUri)}/filename=app.apk`;
+  const apkUri = `${transformIpfsLinkToGateway(ipfsUri)}?filename=app.apk`;
   console.log("installing apk from ", apkUri);
   window.open(apkUri);
 }
