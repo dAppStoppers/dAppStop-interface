@@ -5,6 +5,8 @@ import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { dappStopRegistry } from "../lib/dappStopRegistry";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../core/useDebounce";
+import { SmartContractPayload } from "../lib/schemas/SmartContractPayload";
+import { CeramicPayload } from "../lib/schemas/ceramicPayload";
 
 interface FormData {
   title: string;
@@ -20,31 +22,11 @@ interface FormData {
   appVersion: string;
 }
 
-interface ComposePayload {
-  title: string;
-  description: string;
-  appIconUrl: string;
-  previewImageUrls: string[];
-  chain: string;
-  category: string;
-  apkUrl: string;
-  tokenGated: boolean;
-  price: string;
-  appVersion: string;
-}
-
 interface TokenMetadataPayload {
   name: string;
   description: string;
   image: string;
   ceramicURI: string;
-}
-
-interface SmartContractPayload {
-  creator: string;
-  popURI: string;
-  ceramicURI: string;
-  price: string;
 }
 
 const storageClient = makeStorageClient();
@@ -54,7 +36,7 @@ function makeIpfsUri(cid: string) {
   return `ipfs://${cid}`;
 }
 
-export default function HookForm() {
+export default function Publish() {
   const { register, handleSubmit } = useForm<FormData>();
   const { address, isConnected } = useAccount();
   const [contractPayload, setContractPayload] =
@@ -99,18 +81,23 @@ export default function HookForm() {
     console.log("apkCid:", apkCid);
 
     // post to compose
-    const composePayload: ComposePayload = {
+    const composePayload: CeramicPayload = {
       title: data.title,
       description: data.description,
-      appIconUrl: makeIpfsUri(appIconCid),
-      previewImageUrls: [makeIpfsUri(preview1Cid), makeIpfsUri(preview2Cid)],
+      app_icon_url: makeIpfsUri(appIconCid) + "/" + data.appIcon[0].name,
+      preview_image_urls: [
+        makeIpfsUri(preview1Cid) + "/" + data.preview1[0].name,
+        makeIpfsUri(preview2Cid) + "/" + data.preview2[0].name,
+      ],
       chain: data.chain,
       category: data.category,
-      apkUrl: makeIpfsUri(apkCid),
-      tokenGated: data.tokenGated,
+      apk_url: makeIpfsUri(apkCid) + "/" + data.apkFile[0].name,
+      token_gated: data.tokenGated,
       price: data.price,
-      appVersion: data.appVersion,
+      version: data.appVersion,
     };
+
+    console.log("composePayload: ", composePayload);
 
     const composeCreateResp = await composeConnector.create(composePayload);
     console.log("composeCreateResp:", composeCreateResp);
@@ -141,79 +128,110 @@ export default function HookForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <p>Title:</p>
-      <input
-        type="text"
-        placeholder="Title"
-        className="input input-bordered w-full max-w-xs"
-        {...register("title")}
-      />
+    <div className="px-6">
+      <h1 className="text-3xl">Publish your Dapp</h1>
       <br />
-      <p>Description:</p>
-      <input
-        type="text"
-        placeholder="Description"
-        className="input input-bordered w-full max-w-xs"
-        {...register("description")}
-      />
-      <br />
-      <p>App icon:</p>
-      <input type="file" {...register("appIcon")} />
-      <br />
-      <p>Preview image 1:</p>
-      <input type="file" {...register("preview1")} />
-      <p>Preview image 2:</p>
-      <input type="file" {...register("preview2")} />
-      <br />
-      <p>Chain:</p>
-      <select className="select w-full max-w-xs" {...register("chain")}>
-        <option disabled selected>
-          Select Chain
-        </option>
-        <option>Polygon</option>
-        <option>Optimism</option>
-        <option>Klaytn</option>
-      </select>
-      <br />
-      <p>Category:</p>
-      <select className="select w-full max-w-xs" {...register("category")}>
-        <option disabled selected>
-          Category
-        </option>
-        <option>Game</option>
-        <option>Dapp</option>
-      </select>
-      <br />
-      <p>APK file:</p>
-      <input type="file" {...register("apkFile")} />
-      <br />
-      <p>Token gating:</p>
-      <input type="checkbox" className="toggle" {...register("tokenGated")} />
-      <br />
-      <input
-        type="text"
-        placeholder="Price"
-        className="input input-bordered w-full max-w-xs"
-        {...register("price")}
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="App version"
-        className="input input-bordered w-full max-w-xs"
-        {...register("appVersion")}
-      />
-      <br />
-
-      <input
-        className="btn btn-primary"
-        type="submit"
-        disabled={!isConnected}
-      />
-      <button className="btn btn-primary" disabled={!write} onClick={writeIt}>
-        Mint
-      </button>
-    </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <p>Title:</p>
+        <input
+          type="text"
+          placeholder="Title"
+          className="input input-bordered w-full max-w-xs"
+          {...register("title")}
+        />
+        <br />
+        <br />
+        <p>Description:</p>
+        <input
+          type="text"
+          placeholder="Description"
+          className="input input-bordered w-full max-w-xs"
+          {...register("description")}
+        />
+        <br />
+        <br />
+        <p>App icon:</p>
+        <input type="file" {...register("appIcon")} />
+        <br />
+        <br />
+        <p>Preview image 1:</p>
+        <input type="file" {...register("preview1")} />
+        <br />
+        <br />
+        <p>Preview image 2:</p>
+        <input type="file" {...register("preview2")} />
+        <br />
+        <br />
+        <p>Chain:</p>
+        <select className="select w-full max-w-xs" {...register("chain")}>
+          <option disabled selected>
+            Select Chain
+          </option>
+          <option>Polygon</option>
+          <option>Optimism</option>
+          <option>Klaytn</option>
+        </select>
+        <br />
+        <br />
+        <p>Category:</p>
+        <select className="select w-full max-w-xs" {...register("category")}>
+          <option disabled selected>
+            Category
+          </option>
+          <option>Game</option>
+          <option>Dapp</option>
+        </select>
+        <br />
+        <br />
+        <p>APK file:</p>
+        <input type="file" {...register("apkFile")} />
+        <br />
+        <br />
+        <p>Token gating:</p>
+        <p>
+          If you turn it on, we will generate non-transferrable NFT (ERC-1155)
+          and users need to buy it for installing your app.
+        </p>
+        <input
+          type="checkbox"
+          className="toggle toggle-primary"
+          {...register("tokenGated")}
+        />
+        <br />
+        <br />
+        <p>Price:</p>
+        <input
+          type="text"
+          placeholder="Price"
+          className="input input-bordered w-full max-w-xs"
+          {...register("price")}
+        />
+        <br />
+        <br />
+        <p>App version:</p>
+        <input
+          type="text"
+          placeholder="App version"
+          className="input input-bordered w-full max-w-xs"
+          {...register("appVersion")}
+        />
+        <br />
+        <br />
+        <div className="flex justify-evenly pb-16">
+          <input
+            className="btn btn-primary"
+            type="submit"
+            disabled={!isConnected}
+          />
+          <button
+            className="btn btn-primary"
+            disabled={!write}
+            onClick={writeIt}
+          >
+            Mint
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
