@@ -1,4 +1,3 @@
-import { read } from "fs";
 import { isAssetError } from "next/dist/client/route-loader";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -47,7 +46,8 @@ export default function Detail() {
   const detailHeaderProps: DetailHeaderProps = { title: data.title as string };
   const installButtonProps: InstallButtonProps = {
     priceInEth: 0.1,
-    purchaseNft: data.token_gated === "true",
+    purchaseNft: data.token_gated === "false",
+    ipfsUri: data.apk_url,
   };
   const changeLogProps: ChangeLogProps = {
     changeLogItems: [
