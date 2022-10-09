@@ -6,12 +6,12 @@ export const BottomNavbar = () => {
   const router = useRouter();
   return (
     <div className="btm-nav" style={{ zIndex: "100000" }}>
-      <Link href="alerts/">
+      <Link href="/alerts">
         <button className={router.pathname == "/alerts" ? "active" : ""}>
           <BellIcon
             className="h-5 w-5"
             style={{
-              color: router.pathname == "/alerts" ? "#F4511E" : "white"
+              color: router.pathname == "/alerts" ? "#F4511E" : "white",
             }}
           />
         </button>
@@ -22,18 +22,18 @@ export const BottomNavbar = () => {
           <HomeIcon
             className="h-5 w-5"
             style={{
-              color: router.pathname == "/" ? "#F4511E" : "white"
+              color: router.pathname == "/" ? "#F4511E" : "white",
             }}
           />
         </button>
       </Link>
 
-      <Link href="profile/">
+      <Link href="/profile">
         <button className={router.pathname == "/profile" ? "active" : ""}>
           <UserIcon
             className="h-5 w-5"
             style={{
-              color: router.pathname == "/profile" ? "#F4511E" : "white"
+              color: router.pathname == "/profile" ? "#F4511E" : "white",
             }}
           />
         </button>
