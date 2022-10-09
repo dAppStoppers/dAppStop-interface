@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { DappList } from "../components/explore/DappList";
+import { AppData } from "../lib/schemas/appDataSchema";
 import { ComposeConnector } from "../services/ComposeConnector.service";
 import { getDapps } from "../services/graphql.service";
 
@@ -14,13 +15,17 @@ export default function Home() {
       console.log("resp: ", resp?.data.dapps);
 
       const myDapps = resp?.data.dapps;
-      const ceramicDocs = [];
+      const dappData = [];
       for (const dapp of myDapps) {
         const ceramicDoc = await composeConnector.findOne(dapp.ceramicURI);
-        ceramicDocs.push(ceramicDoc);
+        console.log("ceramicDoc: ", ceramicDoc);
+        console.log("dappId: ", dapp.id);
+        const dappId = dapp.id;
+        const data = { ...ceramicDoc, dappId };
+        dappData.push(data);
       }
-      console.log("ceramicDocs: ", ceramicDocs);
-      setDapps(ceramicDocs);
+      console.log("dappData: ", dappData);
+      setDapps(dappData);
     }
     getIt();
   }, []);

@@ -44,7 +44,7 @@ export default function Publish() {
   const debouncedContractPayload = useDebounce(contractPayload, 500);
   // write to smart contract
   const { config } = usePrepareContractWrite({
-    addressOrName: "0x7e912cbcEe54Bf7A70fA97B338Ebc79276AE3bc7",
+    addressOrName: "0x6e95ab8Ac7FB84baA9B54ad81D1E5b9Ea3dc19D8",
     contractInterface: dappStopRegistry.abi,
     functionName: "register",
     args: [debouncedContractPayload],

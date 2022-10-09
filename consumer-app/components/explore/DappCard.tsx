@@ -1,25 +1,24 @@
+import { ComputerDesktopIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { transformIpfsLinkToGateway } from "../../lib/transformIpfsLinkToGateway";
 
 export interface DappCardProps {
   imgSrc: string;
   name: string;
+  description: string;
   rating: number;
+  previewImage1: string;
+  previewImage2: string;
 }
 
-const data = {
-  title: "my passed in title",
-  description: "here is my passed in description",
-  iconUrl: "https://placeimg.com/250/180/arch",
-  previewImage1: "https://placeimg.com/250/180/arch",
-  previewImage2: "https://placeimg.com/250/180/arch",
-};
+export const DappCard = (dappCardProps: any) => {
+  console.log("dappcardprops:", dappCardProps);
 
-export const DappCard = ({ imgSrc, name, rating }: DappCardProps) => {
   return (
     <Link
       href={{
         pathname: "/detail",
-        query: data, // the data
+        query: dappCardProps, // the data
       }}
     >
       <div
@@ -27,12 +26,15 @@ export const DappCard = ({ imgSrc, name, rating }: DappCardProps) => {
         style={{ border: "4px solid rgba(255, 255, 255, 0.15) " }}
       >
         <figure>
-          <img src={imgSrc} alt="Dapp Image" />
+          <img
+            src={transformIpfsLinkToGateway(dappCardProps.app_icon_url)}
+            alt="Dapp Image"
+          />
         </figure>
         <div className="card-body p-3">
-          <h2 className="card-title ">{name}</h2>
+          <h2 className="card-title ">{dappCardProps.title}</h2>
           <div className="badge badge-secondary py-3">
-            {rating} <span className="pl-2">⭐</span>
+            {4.7} <span className="pl-2">⭐</span>
           </div>
         </div>
       </div>

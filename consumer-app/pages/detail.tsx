@@ -1,4 +1,8 @@
+import { read } from "fs";
+import { isAssetError } from "next/dist/client/route-loader";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAccount, useContractRead } from "wagmi";
 import { ChangeLog, ChangeLogProps } from "../components/detail/ChangeLog";
 import { DappInfo, DappInfoProps } from "../components/detail/DappInfo";
 import {
@@ -13,17 +17,37 @@ import {
   InstallButton,
   InstallButtonProps,
 } from "../components/install/InstallButton";
+import { dappStopRegistry } from "../lib/dappStopRegistry";
+import { transformIpfsLinkToGateway } from "../lib/transformIpfsLinkToGateway";
 
 export default function Detail() {
   const router = useRouter();
   const data = router.query;
 
-  console.log("data from detail: ", data);
+  const { address, isConnecting, isDisconnected } = useAccount();
+  const {
+    data: readData,
+    isError,
+    isLoading,
+  } = useContractRead({
+    addressOrName: "0x6e95ab8Ac7FB84baA9B54ad81D1E5b9Ea3dc19D8",
+    contractInterface: dappStopRegistry.abi,
+    functionName: "balanceOf",
+    args: [address, data?.dappId],
+    enabled: true,
+  });
 
+  useEffect(() => {
+    console.log("contract read data", readData);
+    console.log("iserror, ", isError);
+    console.log("isloading, ", isLoading);
+  }, [readData, isAssetError]);
+
+  console.log("wtf is this data: ", data);
   const detailHeaderProps: DetailHeaderProps = { title: data.title as string };
   const installButtonProps: InstallButtonProps = {
     priceInEth: 0.1,
-    purchaseNft: false,
+    purchaseNft: data.token_gated === "true",
   };
   const changeLogProps: ChangeLogProps = {
     changeLogItems: [
@@ -41,8 +65,8 @@ export default function Detail() {
   };
   const imageCarouselProps: ImageCarouselProps = {
     imageUrls: [
-      data.previewImage1 as string,
-      data.previewImage2 as string,
+      transformIpfsLinkToGateway(data.preview_image_urls[0] as string),
+      transformIpfsLinkToGateway(data.preview_image_urls[1] as string),
       // "https://placeimg.com/250/180/arch",
       // "https://placeimg.com/250/180/arch",
     ],
@@ -50,11 +74,11 @@ export default function Detail() {
   const dappInfoProps: DappInfoProps = {
     category: "Gaming",
     chains: ["Polygon", "Boba"],
-    description: "Here is a description of the dapp.",
+    description: data.description as string,
     downloads: 42069,
     publisher: "publisher.eth",
-    publisherIconUrl: "/icons/icon-144x144.png",
-    title: "My Cool Game",
+    publisherIconUrl: transformIpfsLinkToGateway(data.app_icon_url as string),
+    title: data.title as string,
   };
 
   return (

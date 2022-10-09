@@ -23,13 +23,17 @@ const Carousel_ = ({ dapps }: CarouselProps) => {
       className="pt-3 md:px-36"
     >
       {dapps?.map((dapp) => {
-        console.log("my dapp:", dapp);
+        console.log("my dapp yah:", dapp);
         return (
           <div key={dapp.title}>
             <DappCard
+              {...dapp}
               name={dapp.title}
-              imgSrc={transformIpfsLinkToGateway(dapp.preview_image_urls[0])}
-              rating={4.99}
+              // imgSrc={transformIpfsLinkToGateway(dapp.preview_image_urls[0])}
+              // description={dapp.description}
+              // previewImage1={dapp.preview_image_urls[0]}
+              // previewImage2={dapp.preview_image_urls[1]}
+              // rating={4.7}
             />
           </div>
         );
