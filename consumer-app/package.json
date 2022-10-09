@@ -7,11 +7,8 @@
     "export": "next export"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@apollo/client": "^3.7.0",
-=======
     "@pushprotocol/restapi": "^0.1.1",
->>>>>>> 8b19d84 (adding PUSH protocol to opt-in)
     "@rainbow-me/rainbowkit": "^0.7.1",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
