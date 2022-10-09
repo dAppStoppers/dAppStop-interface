@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Profile() {
   return (
     <div className="pb-24 md:pb-24">
@@ -14,7 +16,7 @@ export default function Profile() {
             height: "150px",
             width: "150px",
             position: "sticky",
-            marginTop: "-5rem"
+            marginTop: "-5rem",
           }}
         />
         <p className="pt-2">Game studio name</p>
@@ -27,13 +29,15 @@ export default function Profile() {
           <p style={{ fontSize: "1.1rem" }}>Published</p>
           <p style={{ fontSize: "1.1rem" }}>Apps</p>
         </div>
-        <button className="btn btn-primary">Publish New App</button>
+        <Link href="/hookform">
+          <button className="btn btn-primary">Publish New App</button>
+        </Link>
       </div>
       <div
         className="overflow-x-auto mx-5"
         style={{
           borderRadius: ".5rem",
-          border: "1px solid rgba(255, 255, 255, 0.15)"
+          border: "1px solid rgba(255, 255, 255, 0.15)",
         }}
       >
         <table className="table w-full">
@@ -53,7 +57,7 @@ export default function Profile() {
             <tr
               style={{
                 borderTop: "1px solid rgba(255, 255, 255, 0.15)",
-                width: "100%"
+                width: "100%",
               }}
             >
               <td>
