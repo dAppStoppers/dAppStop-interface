@@ -47,7 +47,7 @@ export default function Detail() {
   const installButtonProps: InstallButtonProps = {
     priceInEth: 0.1,
     purchaseNft: data.token_gated === "false",
-    ipfsUri: data.apk_url,
+    ipfsUri: (data.apk_url as string) ?? "",
   };
   const changeLogProps: ChangeLogProps = {
     changeLogItems: [
@@ -65,8 +65,12 @@ export default function Detail() {
   };
   const imageCarouselProps: ImageCarouselProps = {
     imageUrls: [
-      transformIpfsLinkToGateway(data.preview_image_urls[0] as string),
-      transformIpfsLinkToGateway(data.preview_image_urls[1] as string),
+      transformIpfsLinkToGateway(
+        data.preview_image_urls ? data.preview_image_urls[0] : ""
+      ),
+      transformIpfsLinkToGateway(
+        data.preview_image_urls ? data.preview_image_urls[1] : ""
+      ),
       // "https://placeimg.com/250/180/arch",
       // "https://placeimg.com/250/180/arch",
     ],
