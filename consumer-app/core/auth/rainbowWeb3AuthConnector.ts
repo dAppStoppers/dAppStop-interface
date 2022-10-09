@@ -14,12 +14,12 @@ export const rainbowWeb3AuthConnector = ({ chains }: { chains: Chain[] }) => ({
         clientId:
           "BONXAIAsHEXSHuEpA5kGei87cF8CXcvZIyRQuVgveMEEatHhJe7MeQTWcsq-kylSTBRuYiJkdu3fZcG4fv-O8OI", // Get your own client id from https://dashboard.web3auth.io
         network: "testnet",
-        chainId: "0x1",
-        socialLoginConfig: {},
-      },
+        chainId: "0x137",
+        socialLoginConfig: {}
+      }
     });
     return {
-      connector,
+      connector
     };
-  },
+  }
 });
