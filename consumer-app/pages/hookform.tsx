@@ -1,12 +1,7 @@
 import { useForm } from "react-hook-form";
 import { makeStorageClient } from "../lib/makeStorageClient";
 import { ComposeConnector } from "../services/ComposeConnector.service";
-import {
-  useAccount,
-  useContractWrite,
-  usePrepareContractWrite,
-  useWaitForTransaction,
-} from "wagmi";
+import { useAccount, useContractWrite, usePrepareContractWrite } from "wagmi";
 import { dappStopRegistry } from "../lib/dappStopRegistry";
 import { useEffect, useState } from "react";
 import { useDebounce } from "../core/useDebounce";
@@ -143,14 +138,6 @@ export default function HookForm() {
     };
     console.log("smartContractPayload:", smartContractPayload);
     setContractPayload(smartContractPayload);
-    console.log("contract payload:", contractPayload);
-    // // write to smart contract
-    // if (write) {
-    //   write();
-    //   console.log("did a write");
-    // } else {
-    //   console.log("write is null");
-    // }
   };
 
   return (
