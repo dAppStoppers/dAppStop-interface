@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { ChangeLog, ChangeLogProps } from "../components/detail/ChangeLog";
 import { DappInfo, DappInfoProps } from "../components/detail/DappInfo";
 import {
@@ -14,8 +15,16 @@ import {
 } from "../components/install/InstallButton";
 
 export default function Detail() {
-  const detailHeaderProps: DetailHeaderProps = { title: "Dummy Title" };
-  const installButtonProps: InstallButtonProps = { priceInEth: 0.1 };
+  const router = useRouter();
+  const data = router.query;
+
+  console.log("data from detail: ", data);
+
+  const detailHeaderProps: DetailHeaderProps = { title: data.title as string };
+  const installButtonProps: InstallButtonProps = {
+    priceInEth: 0.1,
+    purchaseNft: false,
+  };
   const changeLogProps: ChangeLogProps = {
     changeLogItems: [
       {
@@ -32,9 +41,10 @@ export default function Detail() {
   };
   const imageCarouselProps: ImageCarouselProps = {
     imageUrls: [
-      "https://placeimg.com/250/180/arch",
-      "https://placeimg.com/250/180/arch",
-      "https://placeimg.com/250/180/arch",
+      data.previewImage1 as string,
+      data.previewImage2 as string,
+      // "https://placeimg.com/250/180/arch",
+      // "https://placeimg.com/250/180/arch",
     ],
   };
   const dappInfoProps: DappInfoProps = {

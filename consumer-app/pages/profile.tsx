@@ -29,7 +29,7 @@ export default function Profile() {
           <p style={{ fontSize: "1.1rem" }}>Published</p>
           <p style={{ fontSize: "1.1rem" }}>Apps</p>
         </div>
-        <Link href="/hookform">
+        <Link href="/publish">
           <button className="btn btn-primary">Publish New App</button>
         </Link>
       </div>
