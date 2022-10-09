@@ -18,12 +18,15 @@ export const DappCard = (dappCardProps: any) => {
     <Link
       href={{
         pathname: "/detail",
-        query: dappCardProps, // the data
+        query: dappCardProps // the data
       }}
     >
       <div
         className="card bg-base-100 shadow-xl mb-10 mx-6 "
-        style={{ border: "4px solid rgba(255, 255, 255, 0.15) " }}
+        style={{
+          border: "4px solid rgba(255, 255, 255, 0.15) ",
+          cursor: "pointer"
+        }}
       >
         <figure>
           <img
