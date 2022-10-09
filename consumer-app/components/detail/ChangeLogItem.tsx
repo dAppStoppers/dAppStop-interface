@@ -11,7 +11,7 @@ export const ChangeLogItem = ({
 }: ChangeLogItemProps) => {
   return (
     <>
-      <h1 className="font-bold">
+      <h1 className="font-bold mt-3">
         Version {versionNumber} -- {date}
       </h1>
       <p>{description}</p>

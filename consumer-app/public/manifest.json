@@ -2,7 +2,7 @@
   "name": "DappStop",
   "short_name": "DappStop",
   "theme_color": "#ffffff",
-  "background_color": "#131415",
+  "background_color": "#000000",
   "display": "fullscreen",
   "orientation": "portrait",
   "scope": "/",
