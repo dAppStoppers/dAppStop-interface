@@ -19,7 +19,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-async function getDapps() {
+export async function getDapps() {
   try {
     const data = await client.query({
       query: gql(tokensQuery),
@@ -29,5 +29,3 @@ async function getDapps() {
     console.error(error);
   }
 }
-
-module.exports = { getDapps };
