@@ -43,7 +43,7 @@ export default function Detail() {
     description: "Here is a description of the dapp.",
     downloads: 42069,
     publisher: "publisher.eth",
-    publisherIconUrl: "https://placeimg.com/250/180/arch",
+    publisherIconUrl: "/icons/icon-144x144.png",
     title: "My Cool Game",
   };
 

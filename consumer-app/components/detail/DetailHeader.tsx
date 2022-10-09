@@ -10,7 +10,7 @@ export const DetailHeader = ({ title }: DetailHeaderProps) => {
     <div className="navbar bg-base-100">
       <div className="navbar-start">
         <Link href="/">
-          <ArrowLeftCircleIcon className="h-6 w-6 cursor-pointer" />
+          <ArrowLeftCircleIcon className="h-6 w-6 cursor-pointer ml-2" />
         </Link>
       </div>
       <div className="navbar-center">
